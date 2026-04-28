@@ -1,0 +1,237 @@
+// Version: 1.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type EnterpriseDispatchId__105993333 = Nat;
+type EnterpriseDispatchId__151383376 = EnterpriseDispatchId__105993333;
+type EnterpriseDispatchStatus__633307762 =
+  {#Cancelled; #Completed; #InProgress; #Open};
+type EnterpriseDispatch__402305575 =
+  {
+    address : Text;
+    budgetUSD : Nat;
+    createdAt : Timestamp__361177397;
+    description : Text;
+    enterpriseClientId : UserId__607373702;
+    id : EnterpriseDispatchId__151383376;
+    serviceCategory : ServiceCategory__159359444;
+    var status : EnterpriseDispatchStatus__633307762;
+    title : Text;
+    var updatedAt : Timestamp__361177397;
+    var workerIds : [UserId__607373702]
+  };
+type EscrowStatus__937170020 = {#Held; #Refunded; #Released};
+type HomeownerProfile__681404305 =
+  {
+    var address : Text;
+    var averageRating : Float;
+    createdAt : Timestamp__778030842;
+    var latitude : Float;
+    var longitude : Float;
+    var ratingCount : Nat;
+    userId : UserId__1043627770
+  };
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type JobId__154232960 = JobId__339598917;
+type JobId__178521612 = JobId__339598917;
+type JobId__339598917 = Nat;
+type JobId__564384924 = JobId__339598917;
+type JobId__567733654 = JobId__339598917;
+type JobStatus__374926235 =
+  {#Accepted; #Cancelled; #Completed; #Disputed; #InProgress; #Open};
+type Job__848768964 =
+  {
+    var acceptedAt : ?Timestamp__838678315;
+    address : Text;
+    budgetUSD : Nat;
+    var completedAt : ?Timestamp__838678315;
+    createdAt : Timestamp__838678315;
+    description : Text;
+    var homeownerConfirmed : Bool;
+    homeownerId : UserId__967865204;
+    id : JobId__567733654;
+    var latitude : Float;
+    var longitude : Float;
+    var photoRefs : [Text];
+    serviceCategory : ServiceCategory__468793389;
+    var status : JobStatus__374926235;
+    var tipAmountUSD : ?Nat;
+    title : Text;
+    var workerConfirmed : Bool;
+    var workerId : ?UserId__967865204
+  };
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type LiabilityWaiver__875645818 =
+  {
+    acceptedAt : Timestamp__778030842;
+    userId : UserId__1043627770;
+    version : Text
+  };
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type NotificationId__261776522 = NotificationId__307495059;
+type NotificationId__307495059 = Nat;
+type NotificationType__908192046 =
+  {
+    #EnterpriseDispatch;
+    #JobAccepted;
+    #JobAvailable;
+    #JobCompleted;
+    #RatingReceived;
+    #TipReceived
+  };
+type Notification__264708741 =
+  {
+    createdAt : Timestamp__515776233;
+    id : NotificationId__261776522;
+    var isRead : Bool;
+    jobId : ?JobId__564384924;
+    message : Text;
+    notificationType : NotificationType__908192046;
+    userId : UserId__990689167
+  };
+type PaymentId__1028426357 = PaymentId__1028686908;
+type PaymentId__1028686908 = Nat;
+type PaymentRecord__879948694 =
+  {
+    amountUSD : Nat;
+    commissionAmount : Nat;
+    createdAt : Timestamp__131386122;
+    var escrowStatus : EscrowStatus__937170020;
+    id : PaymentId__1028426357;
+    jobId : JobId__154232960;
+    stripePaymentIntentId : Text;
+    var stripePayoutId : ?Text;
+    var tipAmountUSD : Nat;
+    var updatedAt : Timestamp__131386122
+  };
+type RatingId__435167965 = RatingId__630786876;
+type RatingId__630786876 = Nat;
+type Rating__68729563 =
+  {
+    comment : ?Text;
+    createdAt : Timestamp__1062572612;
+    id : RatingId__435167965;
+    jobId : JobId__178521612;
+    ratedByUserId : UserId__861171390;
+    ratedUserId : UserId__861171390;
+    score : Nat
+  };
+type ServiceCategory__159359444 = ServiceCategory__67096338;
+type ServiceCategory__468793389 = ServiceCategory__67096338;
+type ServiceCategory__67096338 =
+  {
+    #BushTrimming;
+    #GeneralYardWork;
+    #GutterCleaning;
+    #LawnMowing;
+    #LeafRaking;
+    #PressureWashing;
+    #SnowPlowing;
+    #WeedWhacking;
+    #WindowWashing
+  };
+type Timestamp__1062572612 = Timestamp__301639476;
+type Timestamp__131386122 = Timestamp__301639476;
+type Timestamp__301639476 = Int;
+type Timestamp__361177397 = Timestamp__301639476;
+type Timestamp__515776233 = Timestamp__301639476;
+type Timestamp__778030842 = Timestamp__301639476;
+type Timestamp__838678315 = Timestamp__301639476;
+type UserId__1043627770 = UserId__158757552;
+type UserId__158757552 = Principal;
+type UserId__607373702 = UserId__158757552;
+type UserId__861171390 = UserId__158757552;
+type UserId__967865204 = UserId__158757552;
+type UserId__990689167 = UserId__158757552;
+type VerificationStatus__292524098 = {#Approved; #Pending; #Rejected};
+type WorkerProfile__678030224 =
+  {
+    var averageRating : Float;
+    var completedJobsCount : Nat;
+    createdAt : Timestamp__778030842;
+    var enterpriseTier : Bool;
+    var idDocRef : ?Text;
+    var insuranceDocRef : ?Text;
+    var latitude : Float;
+    var longitude : Float;
+    var radiusMiles : Nat;
+    var ratingCount : Nat;
+    serviceCategories : [ServiceCategory__67096338];
+    userId : UserId__1043627770;
+    var verificationStatus : VerificationStatus__292524098
+  };
+actor {
+  stable dispatches :
+    {
+      var root :
+        Node__46230540<EnterpriseDispatchId__151383376,
+                        EnterpriseDispatch__402305575>;
+      var size : Nat__490723111
+    };
+  stable homeowners :
+    {
+      var root :
+        Node__46230540<UserId__1043627770, HomeownerProfile__681404305>;
+      var size : Nat__490723111
+    };
+  stable jobPayments :
+    {
+      var root : Node__46230540<JobId__567733654, PaymentId__1028426357>;
+      var size : Nat__490723111
+    };
+  stable jobs :
+    {
+      var root : Node__46230540<JobId__567733654, Job__848768964>;
+      var size : Nat__490723111
+    };
+  stable nextDispatchId : {var val : Nat};
+  stable var nextDispatchIdVal : Nat;
+  stable nextJobId : {var val : Nat};
+  stable var nextJobIdVal : Nat;
+  stable nextNotifId : {var val : Nat};
+  stable var nextNotifIdVal : Nat;
+  stable nextPaymentId : {var val : Nat};
+  stable var nextPaymentIdVal : Nat;
+  stable nextRatingId : {var val : Nat};
+  stable var nextRatingIdVal : Nat;
+  stable payments :
+    {
+      var root :
+        Node__46230540<PaymentId__1028426357, PaymentRecord__879948694>;
+      var size : Nat__490723111
+    };
+  stable userNotifs :
+    {
+      var root :
+        Node__46230540<UserId__990689167,
+                        List__415060402<Notification__264708741>>;
+      var size : Nat__490723111
+    };
+  stable userRatings :
+    {
+      var root :
+        Node__46230540<UserId__861171390, List__415060402<Rating__68729563>>;
+      var size : Nat__490723111
+    };
+  stable waivers :
+    {
+      var root :
+        Node__46230540<UserId__1043627770, LiabilityWaiver__875645818>;
+      var size : Nat__490723111
+    };
+  stable workers :
+    {
+      var root : Node__46230540<UserId__1043627770, WorkerProfile__678030224>;
+      var size : Nat__490723111
+    }
+};

@@ -1,0 +1,25 @@
+{
+  "overview": "Pluber is a two-sided home services marketplace — like Uber but for outdoor and home maintenance. Homeowners post jobs with a price they're willing to pay, nearby workers get notified and accept jobs within their service radius. Payments are held in escrow until both parties confirm completion.",
+  "features": [
+    "Homeowner job posting with budget and service category",
+    "Worker job discovery on an interactive map with service radius",
+    "Payment escrow — funds held until both parties confirm job completion",
+    "Tipping after job completion",
+    "Worker onboarding with ID and insurance document upload",
+    "Liability waiver acceptance at signup",
+    "Dynamic worker radius expansion based on completed job count",
+    "Enterprise subcontracting tier for bulk job dispatch",
+    "Ratings and reviews for both homeowners and workers",
+    "In-app notification inbox for job updates"
+  ],
+  "category": "marketplace",
+  "tags": [
+    "home-services",
+    "marketplace",
+    "gig-economy",
+    "payments",
+    "geolocation",
+    "uber-like"
+  ],
+  "last_updated": "2026-04-11T04:15:57.110Z"
+}

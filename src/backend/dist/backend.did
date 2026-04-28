@@ -1,0 +1,249 @@
+type WorkerProfilePublic = 
+ record {
+   averageRating: float64;
+   completedJobsCount: nat;
+   createdAt: Timestamp;
+   enterpriseTier: bool;
+   latitude: float64;
+   longitude: float64;
+   radiusMiles: nat;
+   serviceCategories: vec ServiceCategory;
+   userId: UserId;
+   verificationStatus: VerificationStatus;
+ };
+type VerificationStatus = 
+ variant {
+   Approved;
+   Pending;
+   Rejected;
+ };
+type UserId = principal;
+type Timestamp = int;
+type SubmitRatingInput = 
+ record {
+   comment: opt text;
+   jobId: JobId;
+   ratedUserId: UserId;
+   score: nat;
+ };
+type ServiceCategory = 
+ variant {
+   BushTrimming;
+   GeneralYardWork;
+   GutterCleaning;
+   LawnMowing;
+   LeafRaking;
+   PressureWashing;
+   SnowPlowing;
+   WeedWhacking;
+   WindowWashing;
+ };
+type RegisterWorkerInput = 
+ record {
+   idDocRef: opt text;
+   insuranceDocRef: opt text;
+   latitude: float64;
+   longitude: float64;
+   serviceCategories: vec ServiceCategory;
+ };
+type RegisterHomeownerInput = 
+ record {
+   address: text;
+   latitude: float64;
+   longitude: float64;
+ };
+type RatingId = nat;
+type Rating = 
+ record {
+   comment: opt text;
+   createdAt: Timestamp;
+   id: RatingId;
+   jobId: JobId;
+   ratedByUserId: UserId;
+   ratedUserId: UserId;
+   score: nat;
+ };
+type PaymentRecordPublic = 
+ record {
+   amountUSD: nat;
+   commissionAmount: nat;
+   createdAt: Timestamp;
+   escrowStatus: EscrowStatus;
+   id: PaymentId;
+   jobId: JobId;
+   stripePaymentIntentId: text;
+   stripePayoutId: opt text;
+   tipAmountUSD: nat;
+   updatedAt: Timestamp;
+ };
+type PaymentId = nat;
+type NotificationType = 
+ variant {
+   EnterpriseDispatch;
+   JobAccepted;
+   JobAvailable;
+   JobCompleted;
+   RatingReceived;
+   TipReceived;
+ };
+type NotificationPublic = 
+ record {
+   createdAt: Timestamp;
+   id: NotificationId;
+   isRead: bool;
+   jobId: opt JobId;
+   message: text;
+   notificationType: NotificationType;
+   userId: UserId;
+ };
+type NotificationId = nat;
+type JobStatus = 
+ variant {
+   Accepted;
+   Cancelled;
+   Completed;
+   Disputed;
+   InProgress;
+   Open;
+ };
+type JobPublic = 
+ record {
+   acceptedAt: opt Timestamp;
+   address: text;
+   budgetUSD: nat;
+   completedAt: opt Timestamp;
+   createdAt: Timestamp;
+   description: text;
+   homeownerConfirmed: bool;
+   homeownerId: UserId;
+   id: JobId;
+   latitude: float64;
+   longitude: float64;
+   photoRefs: vec text;
+   serviceCategory: ServiceCategory;
+   status: JobStatus;
+   tipAmountUSD: opt nat;
+   title: text;
+   workerConfirmed: bool;
+   workerId: opt UserId;
+ };
+type JobId = nat;
+type InitiatePaymentInput = 
+ record {
+   amountUSD: nat;
+   jobId: JobId;
+   stripePaymentIntentId: text;
+ };
+type HomeownerProfilePublic = 
+ record {
+   address: text;
+   averageRating: float64;
+   createdAt: Timestamp;
+   latitude: float64;
+   longitude: float64;
+   userId: UserId;
+ };
+type EscrowStatus = 
+ variant {
+   Held;
+   Refunded;
+   Released;
+ };
+type EnterpriseDispatchStatus = 
+ variant {
+   Cancelled;
+   Completed;
+   InProgress;
+   Open;
+ };
+type EnterpriseDispatchPublic = 
+ record {
+   address: text;
+   budgetUSD: nat;
+   createdAt: Timestamp;
+   description: text;
+   enterpriseClientId: UserId;
+   id: EnterpriseDispatchId;
+   serviceCategory: ServiceCategory;
+   status: EnterpriseDispatchStatus;
+   title: text;
+   updatedAt: Timestamp;
+   workerIds: vec UserId;
+ };
+type EnterpriseDispatchId = nat;
+type CreateJobInput = 
+ record {
+   address: text;
+   budgetUSD: nat;
+   description: text;
+   latitude: float64;
+   longitude: float64;
+   photoRefs: vec text;
+   serviceCategory: ServiceCategory;
+   title: text;
+ };
+type CreateEnterpriseDispatchInput = 
+ record {
+   address: text;
+   budgetUSD: nat;
+   description: text;
+   serviceCategory: ServiceCategory;
+   title: text;
+ };
+type AddTipInput = 
+ record {
+   jobId: JobId;
+   tipAmountUSD: nat;
+ };
+service : {
+  acceptJob: (id: JobId) -> (bool);
+  acceptLiabilityWaiver: (version: text) -> (bool);
+  addJobTip: (id: JobId, tipAmountUSD: nat) -> (bool);
+  addTip: (input: AddTipInput) -> (bool);
+  assignWorkerToDispatch: (dispatchId: EnterpriseDispatchId, workerId:
+   UserId) -> (bool);
+  cancelJob: (id: JobId) -> (bool);
+  createEnterpriseDispatch: (input: CreateEnterpriseDispatchInput) ->
+   (EnterpriseDispatchPublic);
+  createJob: (input: CreateJobInput) -> (JobPublic);
+  disputeJob: (id: JobId) -> (bool);
+  findNearbyWorkers: (lat: float64, lng: float64, category:
+   ServiceCategory) -> (vec WorkerProfilePublic) query;
+  getAvailableJobs: () -> (vec JobPublic) query;
+  getAverageRating: (userId: UserId) -> (float64) query;
+  getEnterpriseDispatch: (id: EnterpriseDispatchId) ->
+   (opt EnterpriseDispatchPublic) query;
+  getHomeownerProfile: (userId: UserId) -> (opt HomeownerProfilePublic) query;
+  getJob: (id: JobId) -> (opt JobPublic) query;
+  getMyEnterpriseDispatches: () -> (vec EnterpriseDispatchPublic) query;
+  getMyHomeownerProfile: () -> (opt HomeownerProfilePublic) query;
+  getMyNotifications: () -> (vec NotificationPublic) query;
+  getMyPostedJobs: () -> (vec JobPublic) query;
+  getMyWorkerJobs: () -> (vec JobPublic) query;
+  getMyWorkerProfile: () -> (opt WorkerProfilePublic) query;
+  getOpenEnterpriseDispatches: () -> (vec EnterpriseDispatchPublic) query;
+  getPaymentForJob: (jobId: JobId) -> (opt PaymentRecordPublic) query;
+  getRatingsForUser: (userId: UserId) -> (vec Rating) query;
+  getWorkerProfile: (userId: UserId) -> (opt WorkerProfilePublic) query;
+  hasAcceptedWaiver: () -> (bool) query;
+  homeownerConfirmCompletion: (id: JobId) -> (bool);
+  initiateEscrow: (input: InitiatePaymentInput) -> (PaymentRecordPublic);
+  markAllNotificationsRead: () -> (bool);
+  markNotificationRead: (notifId: NotificationId) -> (bool);
+  refundEscrow: (jobId: JobId) -> (bool);
+  registerHomeowner: (input: RegisterHomeownerInput) ->
+   (HomeownerProfilePublic);
+  registerWorker: (input: RegisterWorkerInput) -> (WorkerProfilePublic);
+  releaseEscrow: (jobId: JobId, stripePayoutId: text) -> (bool);
+  removeWorkerFromDispatch: (dispatchId: EnterpriseDispatchId, workerId:
+   UserId) -> (bool);
+  startJob: (id: JobId) -> (bool);
+  submitRating: (input: SubmitRatingInput) -> (Rating);
+  updateEnterpriseDispatchStatus: (dispatchId: EnterpriseDispatchId, status:
+   EnterpriseDispatchStatus) -> (bool);
+  updateWorkerLocation: (latitude: float64, longitude: float64) -> (bool);
+  updateWorkerRadius: (newRadius: nat) -> (bool);
+  updateWorkerVerification: (workerId: UserId, status: VerificationStatus) ->
+   (bool);
+  workerConfirmCompletion: (id: JobId) -> (bool);
+}
