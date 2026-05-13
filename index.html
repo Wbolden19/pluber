@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pluber - On-Demand Home Services</title>
+    <meta name="description" content="Pluber connects homeowners with local service providers for snow plowing, lawn mowing, window washing, and more." />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pluber - On-Demand Home Services" />
+    <meta property="og:description" content="Pluber connects homeowners with local service providers for snow plowing, lawn mowing, window washing, and more." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/Wbolden19/pluber/main/app/src/frontend/public/assets/generated/hero.jpg" />
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --cyan: #06b6d4;
+        --cyan-dark: #0891b2;
+        --bg: #0a0a0a;
+        --surface: #141414;
+        --border: #222;
+        --text: #f5f5f5;
+        --muted: #888;
+        --font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.5rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Subtle radial glow behind the card */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 70% 50% at 50% 30%, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .card {
+        position: relative;
+        z-index: 1;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 1.25rem;
+        padding: 3rem 2.5rem;
+        max-width: 520px;
+        width: 100%;
+        text-align: center;
+        box-shadow:
+          0 0 0 1px rgba(6, 182, 212, 0.08),
+          0 24px 64px rgba(0, 0, 0, 0.6);
+      }
+
+      .logo-wrap {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 1rem;
+        background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-dark) 100%);
+        margin-bottom: 1.5rem;
+        box-shadow: 0 8px 24px rgba(6, 182, 212, 0.35);
+      }
+
+      .logo-wrap svg {
+        width: 1.75rem;
+        height: 1.75rem;
+        fill: #0a0a0a;
+      }
+
+      h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
+        color: var(--text);
+      }
+
+      h1 span {
+        color: var(--cyan);
+      }
+
+      .tagline {
+        font-size: 1.05rem;
+        font-weight: 400;
+        color: var(--muted);
+        margin-bottom: 2rem;
+        line-height: 1.5;
+      }
+
+      .services {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: rgba(6, 182, 212, 0.08);
+        border: 1px solid rgba(6, 182, 212, 0.18);
+        color: var(--cyan);
+        font-size: 0.78rem;
+        font-weight: 500;
+        padding: 0.3rem 0.75rem;
+        border-radius: 9999px;
+        white-space: nowrap;
+      }
+
+      .divider {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 0 0 1.75rem;
+      }
+
+      .info-text {
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.65;
+        margin-bottom: 1.75rem;
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: var(--cyan);
+        color: #0a0a0a;
+        font-family: var(--font);
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 0.85rem 2.25rem;
+        border: none;
+        border-radius: 0.625rem;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+        box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
+        width: 100%;
+      }
+
+      .cta:hover {
+        background: #22d3ee;
+        box-shadow: 0 6px 28px rgba(6, 182, 212, 0.55);
+        transform: translateY(-1px);
+      }
+
+      .cta:active {
+        transform: translateY(0);
+      }
+
+      .cta svg {
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+
+      footer {
+        position: relative;
+        z-index: 1;
+        margin-top: 2rem;
+        font-size: 0.78rem;
+        color: #555;
+        text-align: center;
+      }
+
+      footer a {
+        color: #555;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      footer a:hover {
+        color: var(--muted);
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          padding: 2rem 1.5rem;
+        }
+
+        h1 {
+          font-size: 1.875rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <!-- Logo icon -->
+      <div class="logo-wrap" aria-hidden="true">
+        <!-- House + wrench icon -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+
+      <h1><span>Pluber</span></h1>
+      <p class="tagline">Your home services, on demand.</p>
+
+      <!-- Service pills -->
+      <div class="services" aria-label="Available services">
+        <span class="pill">❄️ Snow Plowing</span>
+        <span class="pill">🌿 Lawn Mowing</span>
+        <span class="pill">🍂 Leaf Raking</span>
+        <span class="pill">🌳 Bush Trimming</span>
+        <span class="pill">🪟 Window Washing</span>
+        <span class="pill">❄️ Shoveling</span>
+        <span class="pill">🌾 Weed Whacking</span>
+      </div>
+
+      <hr class="divider" />
+
+      <p class="info-text">
+        Pluber is powered by the Internet Computer — a decentralized cloud that keeps
+        your data secure and payments trustless. Visit the deployed app URL below to
+        post a job, find a local pro, and pay only when the work is done.
+      </p>
+
+      <a href="#" class="cta" aria-label="Launch Pluber app">
+        Launch Pluber
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    <footer>
+      &copy; <span id="yr"></span> Pluber. All rights reserved. &nbsp;&middot;&nbsp;
+      <a href="https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral" target="_blank" rel="noopener">Built with caffeine.ai</a>
+    </footer>
+
+    <script>
+      document.getElementById('yr').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
